@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.putragandad.regres.R
 import com.putragandad.regres.databinding.FragmentFirstScreenBinding
 import com.putragandad.regres.databinding.FragmentSecondScreenBinding
@@ -14,6 +15,8 @@ import com.putragandad.regres.databinding.FragmentSecondScreenBinding
 class SecondScreenFragment : Fragment() {
     private var _binding: FragmentSecondScreenBinding? = null
     private val binding get() = _binding!!
+
+    private val args : SecondScreenFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,14 +30,19 @@ class SecondScreenFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         onClickListener()
-        observeUserName()
+        observer()
     }
 
-    private fun observeUserName() {
+    private fun observer() {
+        // observe user name from reqres in third screen
         findNavController().currentBackStackEntry?.savedStateHandle?.getLiveData<String>("username")?.observe(
             viewLifecycleOwner) { result ->
             binding.tvUserName.text = result
         }
+
+        // observe name from first screen (safe args)
+        val argument = args.username
+        binding.tvName.text = argument.toString()
     }
 
     private fun onClickListener() {

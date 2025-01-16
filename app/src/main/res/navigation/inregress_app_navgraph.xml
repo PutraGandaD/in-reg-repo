@@ -22,6 +22,10 @@
         <action
             android:id="@+id/action_secondScreenFragment_to_thirdScreenFragment"
             app:destination="@id/thirdScreenFragment" />
+        <argument
+            android:name="username"
+            app:argType="string"
+            android:defaultValue="" />
     </fragment>
     <fragment
         android:id="@+id/thirdScreenFragment"

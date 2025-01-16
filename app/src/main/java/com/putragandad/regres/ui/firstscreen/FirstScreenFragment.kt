@@ -5,9 +5,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.putragandad.regres.R
 import com.putragandad.regres.databinding.FragmentFirstScreenBinding
+import com.putragandad.regres.ui.secondscreen.SecondScreenFragmentDirections
 
 class FirstScreenFragment : Fragment() {
     private var _binding: FragmentFirstScreenBinding? = null
@@ -29,7 +31,15 @@ class FirstScreenFragment : Fragment() {
 
     private fun onClickListener() {
         binding.btnNext.setOnClickListener {
-            findNavController().navigate(R.id.action_firstScreenFragment_to_secondScreenFragment)
+            val text = binding.etName.editText?.text.toString()
+            if(!text.isNullOrEmpty()) { //check text null/not
+                if (findNavController().currentDestination?.id == R.id.firstScreenFragment) {
+                    val action = FirstScreenFragmentDirections.actionFirstScreenFragmentToSecondScreenFragment(username = text)
+                    findNavController().navigate(action) // send data with safe args
+                }
+            } else {
+                Toast.makeText(requireActivity(), "Name field can't be empty!", Toast.LENGTH_LONG).show()
+            }
         }
     }
 
