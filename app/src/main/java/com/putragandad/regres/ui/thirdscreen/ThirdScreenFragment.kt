@@ -10,6 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.putragandad.regres.databinding.FragmentThirdScreenBinding
@@ -26,7 +27,9 @@ class ThirdScreenFragment : Fragment() {
 
     private val viewModel : ThirdScreenViewModel by viewModels()
     private val adapter = ListUserAdapter { selectedData ->
-        Toast.makeText(requireContext(), "Clicked: ${selectedData.firstName}", Toast.LENGTH_SHORT).show()
+        // send back the result
+        findNavController().previousBackStackEntry?.savedStateHandle?.set("username", "${selectedData.firstName} ${selectedData.lastName}")
+        findNavController().popBackStack()
     }
 
     override fun onCreateView(
@@ -50,7 +53,8 @@ class ThirdScreenFragment : Fragment() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.userResultState.collectLatest { state ->
-                    adapter.submitData(state.data)
+                    adapter.submitData(state.data) // set data to adapter
+
                     // detect internet connection
                     if(!state.isOffline) {
                         binding.pullToRefreshRV.visibility = View.VISIBLE

@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.putragandad.regres.R
 import com.putragandad.regres.databinding.FragmentFirstScreenBinding
@@ -26,6 +27,14 @@ class SecondScreenFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         onClickListener()
+        observeUserName()
+    }
+
+    private fun observeUserName() {
+        findNavController().currentBackStackEntry?.savedStateHandle?.getLiveData<String>("username")?.observe(
+            viewLifecycleOwner) { result ->
+            binding.tvUserName.text = result
+        }
     }
 
     private fun onClickListener() {
