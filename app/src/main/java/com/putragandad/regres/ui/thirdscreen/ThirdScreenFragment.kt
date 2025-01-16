@@ -11,7 +11,6 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.paging.LoadState
-import androidx.paging.PagingData
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.putragandad.regres.databinding.FragmentThirdScreenBinding
 import com.putragandad.regres.ui.thirdscreen.adapter.ListUserAdapter
@@ -44,13 +43,22 @@ class ThirdScreenFragment : Fragment() {
         setUpRecyclerView()
         setUpSwipeRefresh()
         observer()
+        onClickListener()
     }
 
     private fun observer() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.userResultState.collectLatest { state ->
-                    adapter.submitData(state)
+                    adapter.submitData(state.data)
+                    // detect internet connection
+                    if(!state.isOffline) {
+                        binding.pullToRefreshRV.visibility = View.VISIBLE
+                        binding.viewNointernet.root.visibility = View.GONE
+                    } else {
+                        binding.pullToRefreshRV.visibility = View.GONE
+                        binding.viewNointernet.root.visibility = View.VISIBLE
+                    }
                 }
             }
         }
@@ -90,8 +98,19 @@ class ThirdScreenFragment : Fragment() {
 
     private fun setUpSwipeRefresh() {
         binding.pullToRefreshRV.setOnRefreshListener {
-            adapter.refresh()
+            refreshUserList()
         }
+    }
+
+    private fun onClickListener() {
+        binding.viewNointernet.btnTryAgain.setOnClickListener {
+            refreshUserList()
+        }
+    }
+
+    private fun refreshUserList() {
+        viewModel.cleanUserList()
+        viewModel.getListUser()
     }
 
     override fun onDestroy() {

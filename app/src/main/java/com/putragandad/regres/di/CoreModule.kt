@@ -1,11 +1,14 @@
 package com.putragandad.regres.di
 
+import android.content.Context
 import com.putragandad.regres.core.data.repository.ReqresRepository
 import com.putragandad.regres.core.data.source.remote.ApiService
 import com.putragandad.regres.core.data.source.remote.RemoteDataSource
+import com.putragandad.regres.core.utils.InternetCheckManager
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -61,5 +64,10 @@ object CoreModule {
     @Singleton
     fun provideReqresRepository(remoteDataSource: RemoteDataSource): ReqresRepository {
         return ReqresRepository(remoteDataSource)
+    }
+
+    @Provides
+    fun provideInternetCheckManager(@ApplicationContext context: Context) : InternetCheckManager {
+        return InternetCheckManager(context)
     }
 }
