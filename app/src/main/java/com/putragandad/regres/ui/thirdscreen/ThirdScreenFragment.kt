@@ -110,6 +110,10 @@ class ThirdScreenFragment : Fragment() {
         binding.viewNointernet.btnTryAgain.setOnClickListener {
             refreshUserList()
         }
+
+        binding.btnBack.setOnClickListener {
+            findNavController().popBackStack()
+        }
     }
 
     private fun refreshUserList() {
