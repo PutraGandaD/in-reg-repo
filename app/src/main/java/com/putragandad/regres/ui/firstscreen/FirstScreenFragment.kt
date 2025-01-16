@@ -55,6 +55,8 @@ class FirstScreenFragment : Fragment() {
             val text = binding.etPalindrome.editText?.text.toString()
             if(!text.isNullOrEmpty()) {
                 dialogPalindromeResult(viewModel.checkPalindrome(text), text)
+            } else {
+                Toast.makeText(requireActivity(), getString(R.string.palindrome_column_required_error), Toast.LENGTH_LONG).show()
             }
         }
     }

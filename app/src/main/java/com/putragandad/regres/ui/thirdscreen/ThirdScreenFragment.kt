@@ -59,6 +59,7 @@ class ThirdScreenFragment : Fragment() {
                     if(!state.isOffline) {
                         binding.pullToRefreshRV.visibility = View.VISIBLE
                         binding.viewNointernet.root.visibility = View.GONE
+                        binding.viewTimeout.root.visibility = View.GONE
                     } else {
                         binding.pullToRefreshRV.visibility = View.GONE
                         binding.viewNointernet.root.visibility = View.VISIBLE
@@ -84,6 +85,11 @@ class ThirdScreenFragment : Fragment() {
                         binding.pullToRefreshRV.isRefreshing = true
                     } else {
                         binding.pullToRefreshRV.isRefreshing = false
+                        if (adapter.itemCount < 1) { // empty data from api state
+                            binding.viewEmptydata.root.visibility = View.VISIBLE
+                        } else {
+                            binding.viewEmptydata.root.visibility = View.GONE
+                        }
                     }
                 }
 
@@ -95,7 +101,12 @@ class ThirdScreenFragment : Fragment() {
                     }
                 }
 
-                else -> { }
+                is LoadState.Error -> {
+                    if (adapter.itemCount == 0) { // error caused by timeout
+                        binding.pullToRefreshRV.isRefreshing = false
+                        binding.viewTimeout.root.visibility = View.VISIBLE
+                    }
+                }
             }
         }
     }
@@ -108,6 +119,14 @@ class ThirdScreenFragment : Fragment() {
 
     private fun onClickListener() {
         binding.viewNointernet.btnTryAgain.setOnClickListener {
+            refreshUserList()
+        }
+
+        binding.viewEmptydata.btnTryAgain.setOnClickListener {
+            refreshUserList()
+        }
+
+        binding.viewTimeout.btnTryAgain.setOnClickListener {
             refreshUserList()
         }
 
