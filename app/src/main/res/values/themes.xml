@@ -1,8 +1,9 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Base.Theme.RegresIn" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="android:fontFamily">@font/poppins_font_family</item>
+        <item name="fontFamily">@font/poppins_font_family</item>
+        <item name="android:textColor">@android:color/black</item>
     </style>
 
     <style name="Theme.RegresIn" parent="Base.Theme.RegresIn" />

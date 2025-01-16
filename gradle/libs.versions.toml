@@ -27,6 +27,8 @@ guava = "33.4.0-jre" # Use the latest version
 room-db = "2.6.1"
 navigationFragmentKtxVersion = "2.8.0"
 navigationUiKtxVersion = "2.8.0"
+navigationFragmentKtx = "2.8.5"
+navigationUiKtx = "2.8.5"
 
 
 [libraries]
@@ -68,6 +70,8 @@ room-compiler = { group = "androidx.room", name = "room-compiler", version.ref =
 room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room-db" }
 androidx-navigation-navigation-fragment-ktx = { group = "androidx.navigation", name = "navigation-fragment-ktx", version.ref = "navigationFragmentKtxVersion" }
 androidx-navigation-navigation-ui-ktx = { group = "androidx.navigation", name = "navigation-ui-ktx", version.ref = "navigationUiKtxVersion" }
+androidx-navigation-fragment-ktx = { group = "androidx.navigation", name = "navigation-fragment-ktx", version.ref = "navigationFragmentKtx" }
+androidx-navigation-ui-ktx = { group = "androidx.navigation", name = "navigation-ui-ktx", version.ref = "navigationUiKtx" }
 
 
 [plugins]
