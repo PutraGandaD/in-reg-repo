@@ -29,6 +29,7 @@ See Gradle Version Catalog [here](https://github.com/PutraGandaD/in-reg-repo/blo
 | Collect Data from API re-qr-es.i-n |
 | Pull to refresh implemented |
 | Pagination when scroll reached the end |
+| Set Profile Photo in First Screen with Intent |   
 | Handled No Internet Connection with custom layout and Try Again button (timeout 10 second) |   
 | Handled Server Timeout with custom layout and Try Again button (timeout 10 second)  | 
 | Handled case where data is empty from API with custom layout and Try Again (timeout 10 second) |
