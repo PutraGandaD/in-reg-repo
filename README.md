@@ -1,5 +1,9 @@
 ## In-Reg
 Simple Android App <br>
+| APK Name  | Download Link |
+| ------------- | ------------- |
+| Latest Debug APK (Signed) | [See APK Files](https://github.com/PutraGandaD/in-reg-repo/blob/mvvm/app-debug.apk)  |
+
 | Implementation  | Branch Name |
 | ------------- | ------------- |
 | MVVM Architecture | mvvm  |
