@@ -50,7 +50,7 @@ object CoreModule {
 
     @Provides
     @Singleton
-    fun provideRetrofitApiService(retrofit: Retrofit): ApiService { // Renamed for clarity
+    fun provideRetrofitApiService(retrofit: Retrofit): ApiService {
         return retrofit.create(ApiService::class.java)
     }
 
