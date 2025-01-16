@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@android:color/white"
     android:padding="24dp"
-    tools:context=".fragment.third.ThirdScreenFragment">
+    tools:context=".ui.thirdscreen.ThirdScreenFragment">
 
     <RelativeLayout
         android:id="@+id/topmenu"

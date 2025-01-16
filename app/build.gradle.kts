@@ -90,5 +90,8 @@ dependencies {
     implementation(libs.hilt.android)
     ksp(libs.hilt.compiler)
 
+    // paging
+    implementation(libs.androidx.paging)
+
     implementation(libs.guava)
 }
